@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+i<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -29,6 +29,28 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!-- <script src="http://localhost:9000/widget.js" defer="defer"></script> -->
+    <script type="text/javascript">
+      (function() {
+        var widgetElement = document.createElement('script');
+        widgetElement.type = 'text/javascript';
+        widgetElement.async = true;
+        widgetElement.src = 'http://localhost:9000/widget.js';
+        var s = document.getElementsByTagName('script')[0]; 
+        s.parentNode.insertBefore(widgetElement, s);
+        // Handle Script loading
+        var done = false;
+        var head = document.getElementsByTagName("head")[0] || document.documentElement;
+        widgetElement.onload = widgetElement.onreadystatechange = function() {
+          if ( !done && (!this.readyState ||
+                  this.readyState === "loaded" || this.readyState === "complete") ) {
+              done = true;
+            element = new EmbeddableWidget('company123', 'website123');
+            EmbeddableWidget.mount({...element});
+          }
+        };
+      })();
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
